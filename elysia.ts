@@ -1,5 +1,6 @@
-import { Elysia } from 'elysia';
+import { Elysia, t } from 'elysia';
 import { plugin } from './plugin';
+import { signInDTO } from './models';
 
 const app = new Elysia()
   .use(plugin)
@@ -45,8 +46,39 @@ const app = new Elysia()
         'White Riot',
       ],
     };
-  })
-  // Listens on...
-  .listen(3000);
+  });
+app.group('/user', (app) =>
+  app
+    .post('/sign-in', ({ body }) => body, {
+      body: signInDTO,
+      response: signInDTO,
+    })
+    .post('/sign-up', () => 'Signup Route')
+    .post('/profile', () => 'Profile Route')
+    .get('/:id', () => 'User By Id')
+);
+app.group('/v1', (app) =>
+  app
+    .get('/', () => 'Version 1')
+    .group('/products', (app) =>
+      app
+        .post('/', () => 'Create Prducts')
+        .get(
+          '/:id',
+          ({ params: { id } }) => {
+            return id;
+          },
+          {
+            params: t.Object({
+              id: t.Numeric(),
+            }),
+          }
+        )
+        .put('/:id', () => 'Update Product by Id')
+        .delete('/:id', () => 'Delete Product by Id')
+    )
+);
+// Listens on...
+app.listen(3000);
 
 console.log(`Running on ${app.server?.hostname}:${app.server?.port}`);
