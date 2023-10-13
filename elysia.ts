@@ -1,6 +1,8 @@
 import { Elysia } from 'elysia';
+import { plugin } from './plugin';
 
 const app = new Elysia()
+  .use(plugin)
   .state({
     id: 1,
     email: 'jjj@jjj.com',
@@ -22,6 +24,7 @@ const app = new Elysia()
   .get('/tracks', ({ store, getDate }) => {
     console.log(store);
     console.log(getDate());
+    console.log(store['plugin-version']);
     return new Response(
       JSON.stringify({
         tracks: ['Dancing Feet', 'Anarchy in The UK', 'Clash City Rockers'],
