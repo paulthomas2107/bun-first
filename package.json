@@ -1,11 +1,19 @@
 {
   "name": "bun-first",
   "module": "index.ts",
-  "type": "module",
   "devDependencies": {
     "bun-types": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "startweb": "bun run webserver.ts",
+    "startdevweb": "bun --watch webserver.ts"
+  },
+  "type": "module",
+  "dependencies": {
+    "@types/figlet": "^1.5.6",
+    "figlet": "^1.6.0"
   }
 }
