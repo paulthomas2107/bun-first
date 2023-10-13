@@ -9,11 +9,13 @@
   },
   "scripts": {
     "startweb": "bun run webserver.ts",
-    "startdevweb": "bun --watch webserver.ts"
+    "startdevweb": "bun --watch webserver.ts",
+    "startdevel": "bun --watch elysia.ts"
   },
   "type": "module",
   "dependencies": {
     "@types/figlet": "^1.5.6",
+    "elysia": "^0.7.16",
     "figlet": "^1.6.0"
   }
 }
